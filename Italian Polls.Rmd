@@ -10,6 +10,30 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+library(tidyverse)
+```
+
+```{r, message = FALSE}
+Italian <- read_csv('~/Desktop/Gov 1005/class-2018-10-01/polls_IT-parliament_2018-10-01.csv') %>%
+  select(date, firm, n, LN, M5S, FIPDLFI, PD)
+
+Italian %>%
+  filter(date >= "2017-09-26") %>%
+  gather(key = "Party", value = "Poll", LN, M5S, FIPDLFI, PD) %>%
+ggplot(aes(x = date, y = Poll, color = Party)) + 
+  geom_point(alpha = 0.1, size = .5) +
+  geom_smooth(se = FALSE)
+```
+Purpose of this document is to show polling results in Italy.
+
+#date, firm, n, ln, m5s
+
+```{r}
+ggplot(Italian, aes(x = date, y = LN, color = "red")) + geom_point() + 
+  geom_point(aes(x = date, y = M5S, color = "blue")) 
+
+
+
 
 ```
 
